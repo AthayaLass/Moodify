@@ -126,26 +126,27 @@
             const imagePattern = `${mood}-###.jpg`;
             let currentImageIndex = 0;
 
-            async function fetchImages() {
-                const totalImages = 20; // Total number of available images
-                const selectedImagesCount = 10; // Number of images to randomly pick
-                const selectedIndices = new Set();
-                const images = [];
-            
-                // Generate a set of unique random indices
-                while (selectedIndices.size < selectedImagesCount) {
-                    const randomIndex = Math.floor(Math.random() * totalImages) + 1; // Random index between 1 and totalImages
-                    selectedIndices.add(randomIndex);
-                }
-            
-                // Use the unique indices to generate image URLs
-                for (const index of selectedIndices) {
-                    const imageUrl = `${imageFolder}${imagePattern.replace('###', String(index).padStart(3, '0'))}`;
-                    images.push(imageUrl);
-                }
-            
-                return images;
+                    async function fetchImages() {
+            const totalImages = 20; // Total number of available images
+            const selectedImagesCount = 10; // Number of images to randomly pick
+            const selectedIndices = new Set();
+            const images = [];
+        
+            // Generate a set of unique random indices
+            while (selectedIndices.size < selectedImagesCount) {
+                const randomIndex = Math.floor(Math.random() * totalImages) + 1; // Random index between 1 and totalImages
+                selectedIndices.add(randomIndex);
             }
+        
+            // Use the unique indices to generate image URLs
+            for (const index of selectedIndices) {
+                const imageUrl = `${imageFolder}${imagePattern.replace('###', String(index).padStart(3, '0'))}`;
+                images.push(imageUrl);
+            }
+        
+            return images;
+        }
+
 
 
             fetchImages().then(images => {
