@@ -1,0 +1,22 @@
+help me make a website that, when a user goes on it, it asks for the person's "modification" (buttons with: "happy", "sad", "zen") and, according to the user response, will show them a set of 5 random pictures, that will be randomized everytime the user goes loads the page. The pictures must come out of the right folder (source: /assets/Photos/{happy or sad or zen}/{happy or sad or zen}-###.jpg) and a song must play on a loop depending on the user input (music source: /assets/audio/{happy or sad or zen}.mp3). 
+
+The picture need to appear in a bubble of around 50% of the screen max size. make it so they fit on the screen no matter the screen size (mobile phone or desktop computer). The behaviour of the bubble should change depending on the mood. Happy should be bouncy, sad should be floating slowly in a round motion and zen should float slowly up and down.
+The images should transition every 5 seconds and the loop should continue until the user decides to quit out of it by clicking the pictures (every picture should work). clicking or touching a picture will stop and close the slideshow and show the number of days since the 08th of December 2016 with a header above it. 
+The initial theme should be reminiscent of the island of Bali. The theme and the animation should also change to fit the user input.  
+I need guidance on html, css and javascript. The website show work if I copy paste everything
+------------
+I am making a website. I want you to create a new code from scratch.
+
+goal:
+Helping the user's mood by "moodifying" them.
+
+Features:
+- Content: The website is short. This idea is that the user should go on it, see a heading saying "De quelle Moodification as-tu besoin aujourd'hui ?" and select between 3 options: "happy", "sad", "zen". This options should be buttons. Once the user clicks on a button, everthing to that point should become "hidden" and, depending on the option chose, the theme will change, a specific audio will play and images from different folder will appear as a slideshow with 5 seconds between each transition. The audio (source: /assets/audio/{happy or sad or zen}.mp3) will play on a loop. The images for the slideshow (source: /assets/Photos/{happy or sad or zen}/{happy or sad or zen}-###.jpg) will be sized according to the user's screen size (maybe using a media query), and be picked in a random order from the right folder.
+Once the user is done, if they click on the currently displayed picture, the slideshow will stop and a new screen with a new theme will appear. On this screen, it should display the time (format: days, hourse, minutes, seconds) since the 8th of December 2016. Above this should be the following heading "Nous sommes une famille depuis", and under the time another heading should say "Ti amo {heart emoji}".
+
+- Aesthetic: On the first screen (with the buttons), the theme used should be tailored around the idea of a tropical island. The colors should be "#81f09f" and "#f7f2be". The buttons look like and behave like soap bubbles. The color for the "happy" button should be "#bee4f7". The color for the "sad" button should be "#e4bef7". The color for the "zen" button should be "#70996d".
+	- happy theme: The background color should be "#bee4f7"
+	- sad theme: The background color should be "#e4bef7"
+	- zen theme: The background color should be "#70996d"
+
+The main things to pay attention to is the picture resizing according to the user's screen size. The picture should absolutly fit the screen size.

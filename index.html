@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moodification</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+        body.tropical {
+            background-color: #81f09f;
+            color: #f7f2be;
+        }
+        .container {
+            text-align: center;
+        }
+        .heading {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .button {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, opacity 0.3s;
+        }
+        .button:hover {
+            transform: scale(1.1);
+            opacity: 0.9;
+        }
+        .happy {
+            background-color: #bee4f7;
+        }
+        .sad {
+            background-color: #e4bef7;
+        }
+        .zen {
+            background-color: #70996d;
+        }
+        #slideshow {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        #family {
+            display: none;
+            text-align: center;
+        }
+        #family .time {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body class="tropical">
+    <div class="container" id="welcome">
+        <div class="heading">De quelle Moodification as-tu besoin aujourd'hui ?</div>
+        <div class="buttons">
+            <button class="button happy" onclick="startMood('happy')">Happy</button>
+            <button class="button sad" onclick="startMood('sad')">Sad</button>
+            <button class="button zen" onclick="startMood('zen')">Zen</button>
+        </div>
+    </div>
+    <div id="slideshow"></div>
+    <div id="family">
+        <h1>Nous sommes une famille depuis</h1>
+        <div class="time" id="timeElapsed"></div>
+        <h2>Ti amo ❤️</h2>
+    </div>
+
+    <script>
+        let slideshow, audio;
+
+        function startMood(mood) {
+            // Hide welcome screen
+            document.getElementById('welcome').style.display = 'none';
+            
+            // Set theme
+            document.body.style.backgroundColor = {
+                happy: '#bee4f7',
+                sad: '#e4bef7',
+                zen: '#70996d'
+            }[mood];
+
+            // Play audio
+            audio = new Audio(`/assets/audio/${mood}.mp3`);
+            audio.loop = true;
+            audio.play();
+
+            // Start slideshow
+            startSlideshow(mood);
+        }
+
+        function startSlideshow(mood) {
+            const slideshowDiv = document.getElementById('slideshow');
+            slideshowDiv.style.display = 'block';
+            
+            const imageFolder = `/assets/Photos/${mood}/`;
+            const imagePattern = `${mood}-###.jpg`;
+            let currentImageIndex = 0;
+
+            async function fetchImages() {
+                const images = [];
+                for (let i = 1; i <= 10; i++) { // Assume 10 images max
+                    const imageUrl = `${imageFolder}${imagePattern.replace('###', String(i).padStart(3, '0'))}`;
+                    images.push(imageUrl);
+                }
+                return images.sort(() => Math.random() - 0.5);
+            }
+
+            fetchImages().then(images => {
+                setInterval(() => {
+                    slideshowDiv.style.backgroundImage = `url('${images[currentImageIndex]}')`;
+                    currentImageIndex = (currentImageIndex + 1) % images.length;
+                }, 5000);
+
+                slideshowDiv.addEventListener('click', stopSlideshow);
+            });
+        }
+
+        function stopSlideshow() {
+            document.getElementById('slideshow').style.display = 'none';
+            if (audio) audio.pause();
+
+            document.getElementById('family').style.display = 'block';
+            displayTimeSince();
+        }
+
+        function displayTimeSince() {
+            const startDate = new Date('2016-12-08T00:00:00');
+            setInterval(() => {
+                const now = new Date();
+                const diff = now - startDate;
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('timeElapsed').textContent = `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
