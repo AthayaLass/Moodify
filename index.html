@@ -109,7 +109,7 @@
             }[mood];
 
             // Play audio
-            audio = new Audio(`./assets/audio/${mood}.mp3`);
+            audio = new Audio(`assets/audio/${mood}.mp3`);
             audio.loop = true;
             audio.play();
 
@@ -121,7 +121,7 @@
             const slideshowDiv = document.getElementById('slideshow');
             slideshowDiv.style.display = 'block';
             
-            const imageFolder = `./assets/Photos/${mood}/`;
+            const imageFolder = `assets/Photos/${mood}/`;
             const imagePattern = `${mood}-###.jpg`;
             let currentImageIndex = 0;
 
