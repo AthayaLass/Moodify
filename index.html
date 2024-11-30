@@ -127,28 +127,26 @@
             let currentImageIndex = 0;
 
             async function fetchImages() {
-            const images = [];
-            const indices = [];
-
-            // Create an array of indices from 1 to 20
-            for (let i = 1; i <= 20; i++) {
-                indices.push(i);
+                const totalImages = 20; // Total number of available images
+                const selectedImagesCount = 10; // Number of images to randomly pick
+                const selectedIndices = new Set();
+                const images = [];
+            
+                // Generate a set of unique random indices
+                while (selectedIndices.size < selectedImagesCount) {
+                    const randomIndex = Math.floor(Math.random() * totalImages) + 1; // Random index between 1 and totalImages
+                    selectedIndices.add(randomIndex);
+                }
+            
+                // Use the unique indices to generate image URLs
+                for (const index of selectedIndices) {
+                    const imageUrl = `${imageFolder}${imagePattern.replace('###', String(index).padStart(3, '0'))}`;
+                    images.push(imageUrl);
+                }
+            
+                return images;
             }
 
-            // Fisher-Yates Shuffle for better randomization of indices
-            for (let i = indices.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1)); // Pick a random index
-                [indices[i], indices[j]] = [indices[j], indices[i]]; // Swap elements
-            }
-
-            // Use the shuffled indices to generate image URLs
-            for (const index of indices) {
-                const imageUrl = `${imageFolder}${imagePattern.replace('###', String(index).padStart(3, '0'))}`;
-                images.push(imageUrl);
-            }
-
-            return images;
-        }
 
             fetchImages().then(images => {
                 setInterval(() => {
