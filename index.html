@@ -63,8 +63,8 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 80%;
-            height: 80%;
+            width: 100%;
+            height: 100%;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
@@ -124,16 +124,31 @@
             
             const imageFolder = `assets/Photos/${mood}/`;
             const imagePattern = `${mood}-###.jpg`;
-            let currentImageIndex = 0;
+            let currentImageIndex = 1;
 
             async function fetchImages() {
-                const images = [];
-                for (let i = 1; i <= 20; i++) { // Assume 20 images max
-                    const imageUrl = `${imageFolder}${imagePattern.replace('###', String(i).padStart(3, '0'))}`;
-                    images.push(imageUrl);
-                }
-                return images.sort(() => Math.random() - 0.5);
+            const images = [];
+            const indices = [];
+
+            // Create an array of indices from 1 to 20
+            for (let i = 1; i <= 20; i++) {
+                indices.push(i);
             }
+
+            // Fisher-Yates Shuffle for better randomization of indices
+            for (let i = indices.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1)); // Pick a random index
+                [indices[i], indices[j]] = [indices[j], indices[i]]; // Swap elements
+            }
+
+            // Use the shuffled indices to generate image URLs
+            for (const index of indices) {
+                const imageUrl = `${imageFolder}${imagePattern.replace('###', String(index).padStart(3, '0'))}`;
+                images.push(imageUrl);
+            }
+
+            return images;
+        }
 
             fetchImages().then(images => {
                 setInterval(() => {
