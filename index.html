@@ -82,9 +82,9 @@
     <div class="container" id="welcome">
         <div class="heading">De quelle Moodification as-tu besoin aujourd'hui ?</div>
         <div class="buttons">
-            <button class="button happy" onclick="startMood('happy')">Happy</button>
-            <button class="button sad" onclick="startMood('sad')">Sad</button>
-            <button class="button zen" onclick="startMood('zen')">Zen</button>
+            <button class="button happy" onclick="startMood('happy')">happy</button>
+            <button class="button sad" onclick="startMood('sad')">sad</button>
+            <button class="button zen" onclick="startMood('zen')">zen</button>
         </div>
     </div>
     <div id="slideshow"></div>
@@ -127,7 +127,7 @@
 
             async function fetchImages() {
                 const images = [];
-                for (let i = 1; i <= 10; i++) { // Assume 10 images max
+                for (let i = 1; i <= 20; i++) { // Assume 20 images max
                     const imageUrl = `${imageFolder}${imagePattern.replace('###', String(i).padStart(3, '0'))}`;
                     images.push(imageUrl);
                 }
