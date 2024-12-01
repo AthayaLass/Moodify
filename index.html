@@ -20,7 +20,7 @@
         }
         body.tropical {
             background: linear-gradient(to right, #ff7e5f, #ebd06e);
-            color: #a3cca1;
+            color: #2c4a2d;
         }
         .container {
             text-align: center;
@@ -39,7 +39,7 @@
             height: 100px;
             border-radius: 50%;
             border: none;
-            color: #b4baed;
+            color: #c8cfb4;
             font-size: 1rem;
             font-family: "Mystery Quest", system-ui;
             cursor: pointer;
@@ -107,9 +107,14 @@
             // Hide welcome screen
             document.getElementById('welcome').style.display = 'none';
 
+            // Create a linear gradient
+            const color1 = '#ff7e5f'; // First color
+            const color2 = '#feb47b'; // Second color
+            const gradientDirection = 'to right'; // Gradient direction
+
             // Set theme
             document.body.style.background = {
-                happy: '#19731c',
+                happy: `linear-gradient(${gradientDirection}, ${color1}, ${color2})`,
                 sad: '#391973',
                 zen: '#196b73'
             }[mood];
