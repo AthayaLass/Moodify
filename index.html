@@ -19,8 +19,8 @@
             font-family: "Mystery Quest", system-ui;
         }
         body.tropical {
-            background: linear-gradient(to right, #ff7e5f, #feb47b);
-            color: #dbc0b4;
+            background: linear-gradient(to right, #ff7e5f, #ebd06e);
+            color: #668733;
         }
         .container {
             text-align: center;
@@ -54,13 +54,13 @@
             opacity: 0.9;
         }
         .happy {
-            background-color: #19731c;
+            background: radial-gradient(circle, #19731c, #8ad48c);
         }
         .sad {
-            background-color: #391973;
+            background: radial-gradient(circle, #391973, #9f84cf);
         }
         .zen {
-            background-color: #196b73;
+            background: radial-gradient(circle, #196b73, #88b8bd);
         }
         #slideshow {
             display: none;
@@ -105,10 +105,15 @@
         function startMood(mood) {
             // Hide welcome screen
             document.getElementById('welcome').style.display = 'none';
+
+            // Create a linear gradient
+            const happyColor1 = '#19731c'; // First color
+            const happyColor2 = '#8ad48c'; // Second color
+            const happyGradientDirection = 'to right'; // Gradient direction
             
             // Set theme
             document.body.style.backgroundColor = {
-                happy: '#19731c',
+                happy: `linear-gradient(${gradientDirection}, ${color1}, ${color2})`;
                 sad: '#391973',
                 zen: '#196b73'
             }[mood];
