@@ -107,16 +107,11 @@
             // Hide welcome screen
             document.getElementById('welcome').style.display = 'none';
 
-            // Create a linear gradient 
-            const color1 = '#8ad48c'; // First color
-            const color2 = '#19731c'; // Second color
-            const gradientDirection = 'to right'; // Gradient direction
-
             // Set theme
             document.body.style.background = {
-                happy: `linear-gradient(${gradientDirection}, ${color1}, ${color2})`,
-                sad: '#391973',
-                zen: '#196b73'
+                happy: '#486e4a',
+                sad: '#4c3d69',
+                zen: '#1f676e'
             }[mood];
 
             // Play audio
