@@ -26,7 +26,7 @@
             text-align: center;
         }
         .heading {
-            font-size: 2rem;
+            font-size: 3rem;
             margin-bottom: 2rem;
         }
         .buttons {
@@ -106,14 +106,9 @@
             // Hide welcome screen
             document.getElementById('welcome').style.display = 'none';
 
-            // Create a linear gradient
-            const happyColor1 = '#19731c'; // First color
-            const happyColor2 = '#8ad48c'; // Second color
-            const happyGradientDirection = 'to right'; // Gradient direction
-            
             // Set theme
             document.body.style.backgroundColor = {
-                happy: `linear-gradient(${gradientDirection}, ${color1}, ${color2})`,
+                happy: '#19731c',
                 sad: '#391973',
                 zen: '#196b73'
             }[mood];
