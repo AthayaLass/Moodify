@@ -65,7 +65,6 @@
             background: radial-gradient(circle,#88b8bd , #196b73);
         }
         #slideshow {
-            display: none;
             position: absolute;
             top: 0;
             left: 0;
@@ -74,6 +73,10 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out; /* Smooth opacity transitions */
+        }
+
         }
         #family {
             display: none;
