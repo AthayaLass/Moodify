@@ -107,25 +107,61 @@
     <script>
         let slideshow, audio;
 
-        function startMood(mood) {
-            // Hide welcome screen
-            document.getElementById('welcome').style.display = 'none';
-
-            // Set theme
-            document.body.style.background = {
-                happy: '#45b550',
-                sad: '#4c3d69',
-                zen: '#1f676e'
-            }[mood];
-
-            // Play audio
-            audio = new Audio(`assets/audio/${mood}.mp3`);
-            audio.loop = true;
-            audio.play();
-
-            // Start slideshow
-            startSlideshow(mood);
+        function startSlideshow(mood) {
+            const slideshowDiv = document.getElementById('slideshow');
+            slideshowDiv.style.display = 'block';
+        
+            const imageFolder = `assets/Photos/${mood}/`;
+            const imagePattern = `${mood}-###.jpg`;
+            let currentImageIndex = 0;
+        
+            async function fetchImages() {
+                const totalImages = 53; // Total number of available images. Here set to the max number of images in the folder with the smaller set (53)
+                const selectedImagesCount = 15; // Number of images to randomly pick
+                const selectedIndices = new Set();
+                const images = [];
+        
+                // Generate a set of unique random indices
+                while (selectedIndices.size < selectedImagesCount) {
+                    const randomIndex = Math.floor(Math.random() * totalImages) + 1; // Random index between 1 and totalImages
+                    selectedIndices.add(randomIndex);
+                }
+        
+                // Use the unique indices to generate image URLs
+                for (const index of selectedIndices) {
+                    const imageUrl = `${imageFolder}${imagePattern.replace('###', String(index).padStart(3, '0'))}`;
+                    images.push(imageUrl);
+                }
+        
+                return images;
+            }
+        
+            fetchImages().then(images => {
+                slideshowDiv.style.transition = 'opacity 1s ease-in-out'; // Smooth fade transition
+                let isFadingOut = false;
+        
+                const updateImage = () => {
+                    if (isFadingOut) {
+                        slideshowDiv.style.opacity = '0';
+                        setTimeout(() => {
+                            slideshowDiv.style.backgroundImage = `url('${images[currentImageIndex]}')`;
+                            currentImageIndex = (currentImageIndex + 1) % images.length;
+                            slideshowDiv.style.opacity = '1';
+                        }, 1000); // Match the transition duration
+                    } else {
+                        slideshowDiv.style.backgroundImage = `url('${images[currentImageIndex]}')`;
+                        currentImageIndex = (currentImageIndex + 1) % images.length;
+                        slideshowDiv.style.opacity = '1';
+                    }
+                    isFadingOut = !isFadingOut;
+                };
+        
+                updateImage();
+                setInterval(updateImage, 5000);
+                slideshowDiv.addEventListener('click', stopSlideshow);
+            });
         }
+
 
         function startSlideshow(mood) {
             const slideshowDiv = document.getElementById('slideshow');
