@@ -116,7 +116,7 @@
             }[mood];
 
             // Play audio
-            audio = new Audio(assets/audio/${mood}.mp3);
+            audio = new Audio(`assets/audio/${mood}.mp3`);
             audio.loop = true;
             audio.play();
 
@@ -128,8 +128,8 @@
             const slideshowDiv = document.getElementById('slideshow');
             slideshowDiv.style.display = 'block';
             
-            const imageFolder = assets/Photos/${mood}/;
-            const imagePattern = ${mood}-###.jpg;
+            const imageFolder = `assets/Photos/${mood}/`;
+            const imagePattern = `${mood}-###.jpg`;
             let currentImageIndex = 0;
 
                     async function fetchImages() {
@@ -146,7 +146,7 @@
         
             // Use the unique indices to generate image URLs
             for (const index of selectedIndices) {
-                const imageUrl = ${imageFolder}${imagePattern.replace('###', String(index).padStart(3, '0'))};
+                const imageUrl = `${imageFolder}${imagePattern.replace('###', String(index).padStart(3, '0'))}`;
                 images.push(imageUrl);
             }
         
@@ -157,7 +157,7 @@
 
             fetchImages().then(images => {
                 setInterval(() => {
-                    slideshowDiv.style.backgroundImage = url('${images[currentImageIndex]}');
+                    slideshowDiv.style.backgroundImage = `url('${images[currentImageIndex]}')`;
                     currentImageIndex = (currentImageIndex + 1) % images.length;
                 }, 5000);
 
@@ -184,7 +184,7 @@
                 const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-                document.getElementById('timeElapsed').textContent = ${days} jours, ${hours} heures, ${minutes} minutes, ${seconds} secondes;
+                document.getElementById('timeElapsed').textContent = `${days} jours, ${hours} heures, ${minutes} minutes, ${seconds} secondes`;
             }, 1000);
         }
     </script>
